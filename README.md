@@ -20,6 +20,37 @@ Kết quả chi tiết sẽ được ghi tại file `test_results.md`.
 ---
 *Dự án được phát triển trong khuôn khổ Lab 4 - AI Thực Chiến.*
 
+## 🐳 Chạy bằng Docker (Khuyến nghị)
+
+Đảm bảo code chạy nhất quán trên **mọi máy** mà không cần cài thêm Python hay uv.
+
+### Yêu cầu
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) hoặc Docker Engine.
+
+### Hướng dẫn
+
+**Bước 1**: Điền đầy đủ các biến API Key vào file `.env` (copy từ `.env.example` nếu có).
+
+**Bước 2**: Build và chạy:
+```bash
+docker compose up --build
+```
+
+**Lần sau** (không cần build lại):
+```bash
+docker compose up
+```
+
+**Dừng lại**:
+```bash
+docker compose down
+```
+
+> [!NOTE]
+> File `.env` **không** được đưa vào Docker image. Nó chỉ được nạp vào container lúc chạy, giúp bảo vệ các API Key nhạy cảm.
+
+---
+
 ## 🌟 Chức năng nổi bật
 1. **Ký ức hội thoại (Memory)**: Lưu trữ lịch sử trò chuyện qua `thread_id`, giúp bot nhớ tên người dùng và các chi tiết thảo luận trước đó.
 2. **Thời tiết & Không khí (Độ tin cậy cao)**: 

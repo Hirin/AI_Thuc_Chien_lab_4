@@ -1,0 +1,25 @@
+services:
+  travelbuddy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: travelbuddy:latest
+    container_name: travelbuddy_app
+
+    # Nạp biến môi trường từ file .env trên máy host
+    # File .env KHÔNG được đưa vào image, chỉ truyền lúc chạy
+    env_file:
+      - .env
+
+    # Chế độ tương tác (cần thiết vì main.py dùng input())
+    stdin_open: true
+    tty: true
+
+    # Giới hạn tài nguyên (Tuỳ chỉnh theo máy)
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+    # Bật lại tự động nếu crash (trừ khi tắt thủ công)
+    restart: unless-stopped

@@ -1,0 +1,43 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Môi trường ảo (đã cài trong Docker image rồi)
+.venv/
+venv/
+env/
+
+# Dữ liệu nhạy cảm - KHÔNG bao giờ đưa vào image
+.env
+.env.*
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test artifacts
+test_results.md
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Models cục bộ (quá lớn)
+models/
+*.gguf
+*.bin
+
+# Logs
+*.log
+logs/
+
+# Git
+.git/
+.gitignore

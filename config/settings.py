@@ -13,7 +13,7 @@ MODEL_CHOICE = os.getenv("LAB4_MODEL") or os.getenv("DEFAULT_MODEL", "gpt-4o-min
 
 # Lựa chọn Prompt: "hardened" (Thiết quân luật) hoặc "basic" (Cơ bản)
 # Bạn có thể quy định trong .env bằng biến PROMPT_MODE
-PROMPT_MODE = os.getenv("PROMPT_MODE", "basic")
+PROMPT_MODE = os.getenv("PROMPT_MODE", "hardened")
 
 def validate_config():
     if "gpt" in MODEL_CHOICE.lower() and "mock" not in MODEL_CHOICE.lower():
