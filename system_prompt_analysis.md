@@ -10,6 +10,30 @@ Prompt được chia thành các block XML rõ ràng để mô hình dễ dàng 
 - `<response_format>`: Quy định cấu trúc câu trả lời đầu ra (format trình bày).
 - `<constraints>`: Các giới hạn tuyệt đối và bảo mật (không gọi 5+3).
 
+## Phân tích & So sánh 2 phiên bản Prompt
+
+| Tính năng | Bản Cơ bản (Basic) | Bản Thiết quân luật (Hardened) |
+| :--- | :--- | :--- |
+| **Vai trò** | Trợ lý hữu ích chung chung. | Chuyên gia du lịch nghiêm ngặt. |
+| **Quy tắc Im lặng** | Không có (Dễ gây gãy luồng Tool). | Có (Silence Rule) - Ép gọi chuỗi Tool im lặng. |
+| **Xử lý địa danh lạ** | Dễ báo lỗi "Không tìm thấy mã". | Tự động gọi `get_airport_code` để tra IATA. |
+| **Bảo mật (Prompt Inj)** | Dễ bị lừa viết code/toán. | Chặn đứng 100% bằng quy tắc OOD. |
+| **Memory** | Chỉ là hướng dẫn gợi ý. | Hướng dẫn rõ ràng về tên và ngữ cảnh. |
+
+---
+
+## Các thành phần "Sống còn" vừa bổ sung:
+
+### 1. Quy tắc Im lặng Tuyệt đối (Strict Silence)
+Đây là quy tắc quan trọng nhất giải quyết lỗi "Agent lặng im/ngáp ngắn ngáp dài" sau khi tra mã IATA. 
+- **Bản Cơ bản**: Sau khi tìm được mã (VD: Pleiku -> PXU), Agent sẽ nói "Mình tìm được mã là PXU rồi, đợi chút mình tìm vé nhé". Câu nói này làm dừng vòng lặp UI, người dùng phải gõ tiếp thì bot mới chạy.
+- **Bản Hardened**: Agent bị cấm nói. Nó phải âm thầm dùng kết quả PXU đó để gọi ngay `search_flights`.
+
+### 2. Luồng tự trị qua Few-shot Examples
+Bằng cách đưa ra ví dụ mẫu: `get_airport_code` -> `search_flights` -> `Kết quả`, chúng ta đã định hướng cho Agent (đặc biệt là gpt-4o) hiểu rằng đây là một **chuỗi liên hoàn**, không phải các bước rời rạc.
+
+---
+
 ## 2. Các quy tắc cốt lõi (Rules)
 
 ### Quy tắc #2: Ưu tiên hành động (Proactive Tool Call)

@@ -2,6 +2,24 @@
 
 Ứng dụng trợ lý du lịch được xây dựng bằng **LangGraph** và **LangChain**, tích hợp các công cụ thu thập dữ liệu giá vé máy bay, khách sạn, thời tiết và chất lượng không khí thực tế.
 
+## 🧪 Kiểm thử (Testing)
+
+### 1. Chạy Unit Test (Cho Logic & Tools)
+Kiểm tra các thành phần đơn lẻ (Fuzzy search, API Fallback, IATA Cache):
+```bash
+uv run python -m pytest tests/test_tools.py
+```
+
+### 2. Chạy End-to-End Test (Cho Agent Flow)
+Script này sẽ giả lập 10+ kịch bản hội thoại thực tế (Memory, Prompt Injection, Dynamic Tools) và xuất báo cáo:
+```bash
+uv run python run_tests.py
+```
+Kết quả chi tiết sẽ được ghi tại file `test_results.md`.
+
+---
+*Dự án được phát triển trong khuôn khổ Lab 4 - AI Thực Chiến.*
+
 ## 🌟 Chức năng nổi bật
 1. **Ký ức hội thoại (Memory)**: Lưu trữ lịch sử trò chuyện qua `thread_id`, giúp bot nhớ tên người dùng và các chi tiết thảo luận trước đó.
 2. **Thời tiết & Không khí (Độ tin cậy cao)**: 
